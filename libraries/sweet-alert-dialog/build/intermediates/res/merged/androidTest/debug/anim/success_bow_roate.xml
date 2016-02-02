@@ -9,4 +9,4 @@
     android:duration="300"
     android:fillAfter="true"
     android:startOffset="215">
-</rotate><!-- From: file:/E:/CodePath/VoicePrintHearing/libraries/sweet-alert-dialog/src/main/res/anim/success_bow_roate.xml --><!-- From: file:/E:/CodePath/VoicePrintHearing/libraries/sweet-alert-dialog/build/intermediates/bundles/debug/res/anim/success_bow_roate.xml -->
+</rotate><!-- From: file:/E:/CodePath/learnmooc-android/libraries/sweet-alert-dialog/src/main/res/anim/success_bow_roate.xml --><!-- From: file:/E:/CodePath/learnmooc-android/libraries/sweet-alert-dialog/build/intermediates/bundles/debug/res/anim/success_bow_roate.xml -->
