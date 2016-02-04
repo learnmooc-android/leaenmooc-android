@@ -1,6 +1,5 @@
 package com.upc.learnmooc.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,7 +29,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * 注册页
  * Created by Explorer on 2016/1/26.
  */
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends BaseActivity {
 
 	private EditText etNickname;//昵称
 	private EditText etEmail;//邮箱
@@ -50,16 +49,16 @@ public class RegisterActivity extends Activity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 				case RESULT_FAILED:
-					showMsgDialog("注册失败,请稍后重试~T_T~","原谅ta了");
+					showMsgDialog("注册失败,请稍后重试~T_T~", "原谅ta了");
 					break;
 				case RESULT_HAS_REGISTER:
-					showMsgDialog("昵称已注册啦~换一个独一无二的名字吧！","这就换！");
+					showMsgDialog("昵称已注册啦~换一个独一无二的名字吧！", "这就换！");
 					break;
 				case RESULT_SUCCESS:
-					showSuccessDialog("注册成功，/n 开始体验吧^_^","马上体验");
+					showSuccessDialog("注册成功，/n 开始体验吧^_^", "马上体验");
 					break;
 				default:
-					showMsgDialog("注册异常,请稍后重试~T_T~","原谅ta了");
+					showMsgDialog("注册异常,请稍后重试~T_T~", "原谅ta了");
 					break;
 			}
 		}
@@ -72,6 +71,7 @@ public class RegisterActivity extends Activity {
 		setContentView(R.layout.register_activity);
 		initViews();
 	}
+
 
 	/**
 	 * 初始化页面

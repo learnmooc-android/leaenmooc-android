@@ -1,6 +1,5 @@
 package com.upc.learnmooc.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,7 +24,7 @@ import com.upc.learnmooc.utils.ToastUtils;
 /**
  * Created by Explorer on 2016/1/26.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 
 
 	private EditText etLoginEmail;
@@ -36,11 +35,11 @@ public class LoginActivity extends Activity {
 	private String mPwd;
 	private static final int LOGIN_SUCCESS = 0;
 
-	private Handler mHandler = new Handler(){
+	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if(msg.what == LOGIN_SUCCESS){
-				startActivity(new Intent(LoginActivity.this,MainActivity.class));
+			if (msg.what == LOGIN_SUCCESS) {
+				startActivity(new Intent(LoginActivity.this, MainActivity.class));
 			}
 
 		}
@@ -98,7 +97,9 @@ public class LoginActivity extends Activity {
 		httpUtils.send(HttpRequest.HttpMethod.POST, url, params, new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
+				System.out.println("登录成功 response is " + responseInfo);
 				refreshUserInfo();
+				System.out.println("信息缓存完成");
 //				User userInfo = getData(responseInfo.result);
 //
 //				//登录成功的话 更新一下用户信息到本地
@@ -137,6 +138,12 @@ public class LoginActivity extends Activity {
 				//从配置文件读取登录信息登录
 				mEmail = user_info.getString("mail", null);
 				mPwd = user_info.getString("password", null);
+			} else {
+				//从输入框读取信息登录
+				if (checkEdit()) {
+					mEmail = etLoginEmail.getText().toString();
+					mPwd = etLoginPwd.getText().toString();
+				}
 			}
 		} else {
 			//从输入框读取信息登录
@@ -151,6 +158,8 @@ public class LoginActivity extends Activity {
 	 * 检查登录项是否为空
 	 */
 	private boolean checkEdit() {
+		mEmail = etLoginEmail.getText().toString();
+		mPwd = etLoginPwd.getText().toString();
 		if (TextUtils.isEmpty(mEmail)) {
 			ToastUtils.showToastShort(LoginActivity.this, "邮箱不能空");
 			return false;
@@ -174,19 +183,20 @@ public class LoginActivity extends Activity {
 	/**
 	 * 登录成功后获取用户基本信息 缓存到本能
 	 */
-	private void refreshUserInfo(){
+	private void refreshUserInfo() {
 		HttpUtils httpRefresh = new HttpUtils();
 		//设置超时时间为 5s
 		httpRefresh.configCurrentHttpCacheExpiry(1000 * 5);
 
 		RequestParams params = new RequestParams();
-		params.addQueryStringParameter("nickname", user_info.getString("nickname",null));
+		params.addQueryStringParameter("nickname", user_info.getString("nickname", null));
 
 		String url = GlobalConstants.GET_USER_INFO;
 		final Message msg = Message.obtain();
-		httpRefresh.send(HttpRequest.HttpMethod.POST, url, params, new RequestCallBack<String>() {
+		httpRefresh.send(HttpRequest.HttpMethod.GET, url, params, new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
+				System.out.println("GET RESULT " + responseInfo.result);
 				User userInfo = getData(responseInfo.result);
 
 				//登录成功的话 更新一下用户信息到本地
@@ -197,12 +207,13 @@ public class LoginActivity extends Activity {
 						.putInt("roleType", userInfo.getRoleType())
 						.apply();
 				msg.what = LOGIN_SUCCESS;
+				mHandler.sendMessage(msg);
 
 			}
 
 			@Override
 			public void onFailure(HttpException e, String s) {
-				ToastUtils.showToastShort(LoginActivity.this, "登录异常");
+				ToastUtils.showToastShort(LoginActivity.this, "缓存信息失败");
 			}
 		});
 	}
