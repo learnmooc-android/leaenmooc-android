@@ -125,7 +125,8 @@ public class LoginActivity extends BaseActivity {
 	 * 忘记密码时跳转
 	 */
 	public void FindPwd(View view) {
-
+		startActivity(new Intent(LoginActivity.this,ResetPwdActivity.class));
+		finish();
 	}
 
 	/**

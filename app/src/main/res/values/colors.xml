@@ -11,5 +11,6 @@
     <color name="register_find_pwd">#50cccc</color>
     <color name="login_clause">#50cccc</color>
     <color name="status_color">#50cccc</color>
+    <color name="word_color">#CCCCCC</color>
 
 </resources>
