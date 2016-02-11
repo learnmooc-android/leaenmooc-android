@@ -7,10 +7,13 @@
     <color name="colorBule">#33ccff</color>
     <color name="update_background_color">#fff</color>
     <color name="register_title_background">#50cccc</color>
-    <color name="register_title_word">#fff</color>
+    <color name="title_word_color">#fff</color>
     <color name="register_find_pwd">#50cccc</color>
     <color name="login_clause">#50cccc</color>
     <color name="status_color">#50cccc</color>
     <color name="word_color">#CCCCCC</color>
+    <color name="word_normal_color">#CCCCCC</color>
+    <color name="word_pressed_color">#50cccc</color>
+    <color name="course_title_color">#50cccc</color>
 
 </resources>
