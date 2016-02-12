@@ -6,14 +6,16 @@
     <color name="colorWhite">#fff</color>
     <color name="colorBule">#33ccff</color>
     <color name="update_background_color">#fff</color>
-    <color name="register_title_background">#50cccc</color>
     <color name="title_word_color">#fff</color>
-    <color name="register_find_pwd">#50cccc</color>
-    <color name="login_clause">#50cccc</color>
-    <color name="status_color">#50cccc</color>
+    <color name="register_find_pwd">#56abe4</color>
+    <color name="login_clause">#56abe4</color>
+    <color name="status_color">#56abe4</color>
     <color name="word_color">#CCCCCC</color>
     <color name="word_normal_color">#CCCCCC</color>
-    <color name="word_pressed_color">#50cccc</color>
-    <color name="course_title_color">#50cccc</color>
+    <color name="word_pressed_color">#56abe4</color>
+    <color name="course_title_color">#56abe4</color>
+    <color name="main_course_word_color">#000000</color>
+    <color name="layout_divider_color">#C0C0C0</color>
+    <color name="top_bar_color">#56abe4</color>
 
 </resources>

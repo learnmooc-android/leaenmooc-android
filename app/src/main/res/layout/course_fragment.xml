@@ -5,20 +5,76 @@
               android:fitsSystemWindows="true"
               android:orientation="vertical">
 
-    <RelativeLayout
+    <include layout="@layout/course_top"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_top_course"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/course_title_color">
+        android:layout_height="200dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/laboratory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/laboratory"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="实验室"
+                android:textColor="@color/main_course_word_color"/>
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/iv_classify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:onClick="ToCourseClassify"
-            android:padding="16dp"
-            android:src="@drawable/course_classify"/>
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/layout_divider_color"/>
+
+        <LinearLayout
+            android:id="@+id/skill_tree"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/skill_tree"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="技能树"
+                android:textColor="@color/main_course_word_color"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/layout_divider_color"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,34 +82,13 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/iv_classify"
-            android:layout_toRightOf="@+id/iv_classify"
-            android:onClick="TurnToLogin"
-            android:text="分类"
-            android:textColor="@color/title_word_color"
-            android:textSize="16sp"/>
-
-        <ImageView
-            android:id="@+id/iv_course_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/iv_course_history"
-            android:layout_toStartOf="@+id/iv_course_history"
-            android:onClick="ToSearchCourse"
-            android:padding="16dp"
-            android:src="@drawable/course_search"/>
-
-        <ImageView
-            android:id="@+id/iv_course_history"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:onClick="ToCourseHistory"
-            android:padding="16dp"
-            android:src="@drawable/course_history"/>
+            android:text="课程列表"
+            android:textSize="14sp"/>
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_list_course"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 </LinearLayout>

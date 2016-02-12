@@ -6,7 +6,7 @@
                      android:top="7dp"
                      android:left="7dp"
                      android:right="7dp"/>
-            <solid android:color="#50cccc"/>
+            <solid android:color="#56abe4"/>
         </shape>
     </item>
     <item android:state_pressed="true">
@@ -15,7 +15,7 @@
                      android:top="7dp"
                      android:left="7dp"
                      android:right="7dp"/>
-            <solid android:color="#00cccc"/>
+            <solid android:color="#50abe4"/>
         </shape>
     </item>
 
