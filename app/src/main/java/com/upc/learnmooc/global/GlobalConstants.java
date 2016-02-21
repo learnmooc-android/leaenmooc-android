@@ -13,5 +13,6 @@ public class GlobalConstants {
 	//	public final static String SERVER_URL = "http://10.0.3.2:8050/VoicePrint";
 //	public final static String SERVER_URL = "http://120.27.47.134/VoicePrint";
 	public final static String DOWNLOAD_URL = SERVER_URL + "/update.json";
+	public final static String GET_MAIN_COURSE_URL = "http://120.27.47.134/mainCourse.json";
 }
 

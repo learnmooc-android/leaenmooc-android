@@ -15,7 +15,7 @@
     <color name="word_pressed_color">#56abe4</color>
     <color name="course_title_color">#56abe4</color>
     <color name="main_course_word_color">#000000</color>
-    <color name="layout_divider_color">#C0C0C0</color>
+    <color name="layout_divider_color">#ECECEC</color>
     <color name="top_bar_color">#56abe4</color>
 
 </resources>

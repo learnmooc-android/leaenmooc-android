@@ -187,7 +187,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	 */
 	private void setSelect(int i) {
 		initTabImage();
-		mViewPager.setCurrentItem(i);
+		mViewPager.setCurrentItem(i,false);
 		switch (i) {
 			case 0:
 				ivCourse.setImageResource(R.drawable.course_pressed);

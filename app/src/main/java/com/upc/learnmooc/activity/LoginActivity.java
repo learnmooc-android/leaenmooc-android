@@ -85,6 +85,7 @@ public class LoginActivity extends BaseActivity {
 		HttpUtils httpUtils = new HttpUtils();
 		//设置超时时间为 5s
 		httpUtils.configCurrentHttpCacheExpiry(1000 * 5);
+		httpUtils.configTimeout(1000 * 5);
 		//获取登录信息
 		getLoginInfo();
 
@@ -188,6 +189,7 @@ public class LoginActivity extends BaseActivity {
 		HttpUtils httpRefresh = new HttpUtils();
 		//设置超时时间为 5s
 		httpRefresh.configCurrentHttpCacheExpiry(1000 * 5);
+		httpRefresh.configTimeout(1000 * 5);
 
 		RequestParams params = new RequestParams();
 		params.addQueryStringParameter("nickname", user_info.getString("nickname", null));

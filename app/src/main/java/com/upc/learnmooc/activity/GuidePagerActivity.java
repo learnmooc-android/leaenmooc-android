@@ -103,7 +103,7 @@ public class GuidePagerActivity extends Activity {
 	}
 
 	/**
-	 * viewwpager适配器
+	 * viewpager适配器
 	 */
 	class GuideAdapter extends PagerAdapter {
 

@@ -109,6 +109,7 @@ public class RegisterActivity extends BaseActivity {
 
 		//设置超时时间为 5s
 		httpUtils.configCurrentHttpCacheExpiry(1000 * 5);
+		httpUtils.configTimeout(1000 * 5);
 		String url = GlobalConstants.REGISTER_URL;
 		mNickname = etNickname.getText().toString();
 		mEmail = etEmail.getText().toString();
