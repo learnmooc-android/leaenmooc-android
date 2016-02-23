@@ -9,7 +9,7 @@
 
     <include layout="@layout/course_top"/>
 
-    <ListView
+    <com.upc.learnmooc.view.RefreshListView
         android:id="@+id/lv_list_course"
         android:layout_width="match_parent"
         android:divider="@null"

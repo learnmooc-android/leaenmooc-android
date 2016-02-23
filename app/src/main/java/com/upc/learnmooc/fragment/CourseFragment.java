@@ -1,15 +1,13 @@
 package com.upc.learnmooc.fragment;
 
-import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -25,14 +23,12 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.upc.learnmooc.R;
 import com.upc.learnmooc.domain.MainCourse;
 import com.upc.learnmooc.global.GlobalConstants;
+import com.upc.learnmooc.utils.CacheUtils;
 import com.upc.learnmooc.utils.ToastUtils;
+import com.upc.learnmooc.view.RefreshListView;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 课程主页
@@ -45,48 +41,25 @@ public class CourseFragment extends BaseFragment {
 	@ViewInject(R.id.top_course_indicator)
 	private CirclePageIndicator mIndictor;
 	@ViewInject(R.id.lv_list_course)
-	private ListView mListView;
+	private RefreshListView mListView;
 
 	private MainCourse mainCourseInfo;//Course首页的数据对象
 	private ArrayList<MainCourse.TopCourse> topCourseList;//头部轮播的数据对象
 	private ArrayList<MainCourse.ListCourse> listCourseList;//课程列表的数据对象
 
-	private String cacheDir;
-	private ArrayList<String> cacheFileName;
-	//放轮播图片的ImageView 的list
-	private List<ImageView> imageViewsList;
+	private String mMoreUrl;
+	private String mUrl = GlobalConstants.GET_MAIN_COURSE_URL;
 
-	//轮播图图片数量
-	private final static int IMAGE_COUNT = 1;
-	//自动轮播的时间间隔
-	private final static int TIME_INTERVAL = 3;
-	//自动轮播启用开关
-	private final static boolean isAutoPlay = true;
 	//当前轮播页
 	private int currentItem = 0;
-	//定时任务
-	private ScheduledExecutorService scheduledExecutorService;
+	private ListCourseAdapter listCourseAdapter;
+	private Handler mHandler;
 
-	//Handler
-	private Handler handler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			//自动轮播到最后一页的时候 无动画切换到第一页 实现无限轮播
-			if (currentItem == 0) {
-				mViewPager.setCurrentItem(currentItem, false);
-			} else {
-				mViewPager.setCurrentItem(currentItem);
-			}
-		}
-
-	};
 
 	@Override
 	public View initViews() {
 		View view = View.inflate(mActivity, R.layout.course_fragment, null);
-		View heardView = View.inflate(mActivity,R.layout.heard_course_listview,null);
+		View heardView = View.inflate(mActivity, R.layout.heard_course_listview, null);
 
 		//注入view和事件
 		ViewUtils.inject(this, view);
@@ -94,46 +67,34 @@ public class CourseFragment extends BaseFragment {
 
 		//将头部的轮播等部分 作为listview的头布局
 		mListView.addHeaderView(heardView);
+		mListView.setOnRefreshListener(new RefreshListView.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				getDataFromServer();
+			}
+
+			@Override
+			public void onLoadMore() {
+				if (mMoreUrl != null) {
+					getMoreDataFromServer();
+					System.out.println("MoreUrl is " + mMoreUrl);
+				} else {
+					ToastUtils.showToastShort(mActivity,"最后一页了");
+					mListView.onRefreshComplete(false);// 收起加载更多的布局
+				}
+			}
+		});
 		return view;
 	}
 
 	@Override
 	public void initData() {
-		cacheDir = Environment.getDataDirectory().getPath() + "/" + mActivity.getPackageName() + "/imgCache";// /data/packname ;
-		cacheFileName = new ArrayList<>();
-		imageViewsList = new ArrayList<>();
-		getDataFromServer();
-	}
+		String cache = CacheUtils.getCache(mUrl, mActivity);
 
-
-	/**
-	 * 开始轮播图切换
-	 */
-	private void startPlay() {
-		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-		scheduledExecutorService.scheduleAtFixedRate(new SlideShowTask(), 2, 3, TimeUnit.SECONDS);
-	}
-
-	/**
-	 * 停止轮播图切换
-	 */
-	private void stopPlay() {
-		scheduledExecutorService.shutdown();
-	}
-
-	/**
-	 * 执行轮播图切换任务
-	 */
-	private class SlideShowTask implements Runnable {
-
-		@Override
-		public void run() {
-			synchronized (mViewPager) {
-				currentItem = (currentItem + 1) % topCourseList.size();
-				handler.obtainMessage().sendToTarget();
-			}
+		if (!TextUtils.isEmpty(cache)) {
+			parseData(cache, false);
 		}
-
+		getDataFromServer();
 	}
 
 	/**
@@ -192,7 +153,11 @@ public class CourseFragment extends BaseFragment {
 		httpUtils.send(HttpRequest.HttpMethod.GET, GlobalConstants.GET_MAIN_COURSE_URL, new RequestCallBack<String>() {
 			@Override
 			public void onSuccess(ResponseInfo<String> responseInfo) {
-				parseData(responseInfo.result);
+				parseData(responseInfo.result, false);
+				mListView.onRefreshComplete(true);
+
+				// 设置缓存
+				CacheUtils.setCache(mUrl, responseInfo.result, mActivity);
 			}
 
 			@Override
@@ -202,6 +167,32 @@ public class CourseFragment extends BaseFragment {
 				mViewPager.setAdapter(new TopCourseAdapter());//获取数据失败的时候设置适配器(进行读取缓存或默认加载处理)
 				mIndictor.setViewPager(mViewPager);//给指示器绑定viewpager
 				mIndictor.setSnap(true);//支持快照
+				mListView.onRefreshComplete(false);
+			}
+		});
+	}
+
+	/**
+	 * 加载下一页数据
+	 */
+	private void getMoreDataFromServer() {
+		HttpUtils utils = new HttpUtils();
+		utils.send(HttpRequest.HttpMethod.GET, mMoreUrl, new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				String result = (String) responseInfo.result;
+
+				parseData(result, true);
+
+				mListView.onRefreshComplete(true);
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				error.printStackTrace();
+				ToastUtils.showToastShort(mActivity,"加载失败");
+				mListView.onRefreshComplete(false);
 			}
 		});
 	}
@@ -209,27 +200,62 @@ public class CourseFragment extends BaseFragment {
 	/**
 	 * 解析返回json数据
 	 */
-	private void parseData(String result) {
+	private void parseData(String result, boolean isMore) {
 		Gson gson = new Gson();
 		mainCourseInfo = gson.fromJson(result, MainCourse.class);
-		topCourseList = mainCourseInfo.topCourse;
-		listCourseList = mainCourseInfo.listCourse;
-		if (topCourseList != null) {
-			TopCourseAdapter topCourseAdapter = new TopCourseAdapter();
-			mViewPager.setAdapter(topCourseAdapter);//成功获取数据后数据适配器
-			mIndictor.setViewPager(mViewPager);//给指示器绑定viewpager
-			mIndictor.setSnap(true);//支持快照
-			if (isAutoPlay) {
-				startPlay();
+		// 处理下一页链接
+		String more = mainCourseInfo.more;
+		if (!TextUtils.isEmpty(more)) {
+			mMoreUrl = more;
+		} else {
+			mMoreUrl = null;
+		}
+
+
+		if (!isMore) {
+			topCourseList = mainCourseInfo.topCourse;
+			listCourseList = mainCourseInfo.listCourse;
+
+			if (topCourseList != null) {
+				TopCourseAdapter topCourseAdapter = new TopCourseAdapter();
+				mViewPager.setAdapter(topCourseAdapter);//成功获取数据后数据适配器
+				mIndictor.setViewPager(mViewPager);//给指示器绑定viewpager
+				mIndictor.setSnap(true);//支持快照
+				mIndictor.setOnPageChangeListener(new MyPageChangeListener());
 			}
-			mIndictor.setOnPageChangeListener(new MyPageChangeListener());
-		}
 
 
-		if (listCourseList != null) {
-			ListCourseAdapter listCourseAdapter = new ListCourseAdapter();
-			mListView.setAdapter(listCourseAdapter);
+			if (listCourseList != null) {
+				listCourseAdapter = new ListCourseAdapter();
+				mListView.setAdapter(listCourseAdapter);
+			}
+
+			// 自动轮播条显示
+			if (mHandler == null) {
+				mHandler = new Handler() {
+					public void handleMessage(android.os.Message msg) {
+						currentItem = mViewPager.getCurrentItem();
+
+						if (currentItem < topCourseList.size() - 1) {
+							currentItem++;
+							mViewPager.setCurrentItem(currentItem);// 切换到下一个页面
+						} else {
+							currentItem = 0;
+							mViewPager.setCurrentItem(currentItem,false);// 切换到下一个页面
+						}
+
+						mHandler.sendEmptyMessageDelayed(0, 3000);// 继续延时3秒发消息, 形成循环
+					};
+				};
+
+				mHandler.sendEmptyMessageDelayed(0, 3000);// 延时3秒后发消息
+			}
+		}else {// 如果是加载下一页,需要将数据追加给原来的集合
+			ArrayList<MainCourse.ListCourse> course =  mainCourseInfo.listCourse;
+			listCourseList.addAll(course);//将数据追加给原来的集合
+			listCourseAdapter.notifyDataSetChanged();//适配器刷新数据
 		}
+
 	}
 
 	/**
@@ -245,7 +271,6 @@ public class CourseFragment extends BaseFragment {
 			config = new BitmapDisplayConfig();
 			config.setLoadingDrawable(getResources().getDrawable(R.drawable.top_course_default));
 			bitmapUtils = new BitmapUtils(mActivity);
-			System.out.println("cache is " + cacheDir);
 			//设置默认记载过程中的默认显示图
 			bitmapUtils.configDefaultLoadingImage(R.drawable.top_course_default);
 		}
@@ -253,10 +278,7 @@ public class CourseFragment extends BaseFragment {
 		@Override
 		public int getCount() {
 			if (topCourseList == null) {
-				if (cacheFileName.isEmpty()) {
-					return 1;
-				}
-				return cacheFileName.size();
+				return 1;
 			}
 			return topCourseList.size();
 		}
@@ -271,17 +293,7 @@ public class CourseFragment extends BaseFragment {
 			ImageView imageView = new ImageView(mActivity);
 			imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 			if (topCourseList != null) {
-				//成功获取数据后 保存缓存文件名
-//				bitmapUtils.configDiskCacheFileNameGenerator(new FileNameGenerator() {
-//					@Override
-//					public String generate(String s) {
-//						System.out.println("position is " + position);
-//
-//						return topCourseList.get(position).courseId + "";//
-//					}
-//				});
 				bitmapUtils.display(imageView, topCourseList.get(position).topCourseImgUrl, config);
-//				imageViewsList.add(imageView);
 			} else {
 				//获取网络数据失败时 显示默认图片
 				imageView.setImageDrawable(getResources().getDrawable(R.drawable.top_course_default));
@@ -342,7 +354,7 @@ public class CourseFragment extends BaseFragment {
 
 			MainCourse.ListCourse item = getItem(position);
 			holder.tvCourseName.setText(item.getCourseName());
-			holder.tvLearnerNum.setText(item.getNum()+"");
+			holder.tvLearnerNum.setText(item.getNum() + "");
 			holder.tvCoursedate.setText(item.getPubdate());
 			bitmapUtils.display(holder.ivCourseImg, item.getThumbnailUrl());
 

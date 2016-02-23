@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class MainCourse {
 	public ArrayList<TopCourse> topCourse;
 	public ArrayList<ListCourse> listCourse;
-
+	public String more;//分页加载时  下一页的url
 
 	/**
 	 * 头部轮播课程数据
@@ -62,6 +62,7 @@ public class MainCourse {
 		public int num;//选修人数
 		public String pubdate;
 		public String thumbnailUrl;
+
 
 		public int getCourseId() {
 			return courseId;
