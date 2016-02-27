@@ -17,5 +17,7 @@
     <color name="main_course_word_color">#000000</color>
     <color name="layout_divider_color">#ECECEC</color>
     <color name="top_bar_color">#56abe4</color>
+    <color name="mine_bg_color">#474947</color>
+    <color name="mine_bg_word_color">#84817F</color>
 
 </resources>

@@ -52,13 +52,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			setTranslucentStatus(true);
-			SystemBarTintManager tintManager = new SystemBarTintManager(this);
-			tintManager.setStatusBarTintEnabled(true);
-			tintManager.setStatusBarTintResource(R.color.status_color);//通知栏所需颜色
-		}
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main_activity);
 		initViews();
 		initEvents();
@@ -85,6 +78,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	 * 初始化布局
 	 */
 	private void initViews() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			setTranslucentStatus(true);
+			SystemBarTintManager tintManager = new SystemBarTintManager(this);
+			tintManager.setStatusBarTintEnabled(true);
+			tintManager.setStatusBarTintResource(R.color.status_color);//通知栏所需颜色
+		}
 
 		mViewPager = (ViewPager) findViewById(R.id.vp_main);
 		//获取底部四个tab布局
