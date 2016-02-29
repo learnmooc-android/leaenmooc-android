@@ -47,7 +47,8 @@ public class ResetPwdActivity extends BaseActivity {
 	/**
 	 * 初始化布局
 	 */
-	private void initViews() {
+	@Override
+	public void initViews() {
 		etResetEmail = (EditText) findViewById(R.id.et_resetpwd_email);
 	}
 

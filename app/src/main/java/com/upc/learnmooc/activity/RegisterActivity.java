@@ -76,7 +76,8 @@ public class RegisterActivity extends BaseActivity {
 	/**
 	 * 初始化页面
 	 */
-	private void initViews() {
+	@Override
+	public void initViews() {
 		etNickname = (EditText) findViewById(R.id.et_nickname);
 		etEmail = (EditText) findViewById(R.id.et_email);
 		etPwd = (EditText) findViewById(R.id.et_pwd);

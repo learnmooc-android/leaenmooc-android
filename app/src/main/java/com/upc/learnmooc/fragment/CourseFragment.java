@@ -1,5 +1,6 @@
 package com.upc.learnmooc.fragment;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -21,6 +22,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.upc.learnmooc.R;
+import com.upc.learnmooc.activity.ClassifyActivity;
 import com.upc.learnmooc.domain.MainCourse;
 import com.upc.learnmooc.global.GlobalConstants;
 import com.upc.learnmooc.utils.CacheUtils;
@@ -79,7 +81,7 @@ public class CourseFragment extends BaseFragment {
 					getMoreDataFromServer();
 					System.out.println("MoreUrl is " + mMoreUrl);
 				} else {
-					ToastUtils.showToastShort(mActivity,"最后一页了");
+					ToastUtils.showToastShort(mActivity, "最后一页了");
 					mListView.onRefreshComplete(false);// 收起加载更多的布局
 				}
 			}
@@ -191,7 +193,7 @@ public class CourseFragment extends BaseFragment {
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				error.printStackTrace();
-				ToastUtils.showToastShort(mActivity,"加载失败");
+				ToastUtils.showToastShort(mActivity, "加载失败");
 				mListView.onRefreshComplete(false);
 			}
 		});
@@ -241,17 +243,19 @@ public class CourseFragment extends BaseFragment {
 							mViewPager.setCurrentItem(currentItem);// 切换到下一个页面
 						} else {
 							currentItem = 0;
-							mViewPager.setCurrentItem(currentItem,false);// 切换到下一个页面
+							mViewPager.setCurrentItem(currentItem, false);// 切换到下一个页面
 						}
 
 						mHandler.sendEmptyMessageDelayed(0, 3000);// 继续延时3秒发消息, 形成循环
-					};
+					}
+
+					;
 				};
 
 				mHandler.sendEmptyMessageDelayed(0, 3000);// 延时3秒后发消息
 			}
-		}else {// 如果是加载下一页,需要将数据追加给原来的集合
-			ArrayList<MainCourse.ListCourse> course =  mainCourseInfo.listCourse;
+		} else {// 如果是加载下一页,需要将数据追加给原来的集合
+			ArrayList<MainCourse.ListCourse> course = mainCourseInfo.listCourse;
 			listCourseList.addAll(course);//将数据追加给原来的集合
 			listCourseAdapter.notifyDataSetChanged();//适配器刷新数据
 		}
@@ -369,5 +373,7 @@ public class CourseFragment extends BaseFragment {
 		public TextView tvCoursedate;
 
 	}
+
+
 
 }

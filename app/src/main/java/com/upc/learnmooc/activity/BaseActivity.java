@@ -13,7 +13,7 @@ import com.upc.learnmooc.utils.SystemBarTintManager;
 /**
  * Created by Explorer on 2016/2/4.
  */
-public class BaseActivity extends Activity{
+public abstract class BaseActivity extends Activity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,4 +38,7 @@ public class BaseActivity extends Activity{
 		}
 		win.setAttributes(winParams);
 	}
+
+	public abstract void initViews();
+
 }

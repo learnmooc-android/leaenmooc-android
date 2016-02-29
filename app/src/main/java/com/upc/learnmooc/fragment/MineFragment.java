@@ -39,12 +39,6 @@ public class MineFragment extends BaseFragment {
 		View view = View.inflate(mActivity, R.layout.mine_fragment, null);
 		//注入view和事件
 		ViewUtils.inject(this, view);
-//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//			setTranslucentStatus(true);
-//			SystemBarTintManager tintManager= new SystemBarTintManager(mActivity);
-//			tintManager.setStatusBarTintEnabled(true);
-//			tintManager.setStatusBarTintResource(R.color.mine_bg_color);//通知栏所需颜色
-//		}
 		listData = new ArrayList<>();
 		SimpleAdapter gridViewAdapter = new SimpleAdapter(mActivity, getData(), R.layout.item_mine_gridview,
 				new String[]{"iv_pic","tv_name"}, new int[]{R.id.iv_pic, R.id.tv_name});

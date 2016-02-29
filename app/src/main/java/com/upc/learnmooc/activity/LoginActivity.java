@@ -53,10 +53,8 @@ public class LoginActivity extends BaseActivity {
 		initViews();
 	}
 
-	/**
-	 * 初始化页面
-	 */
-	private void initViews() {
+	@Override
+	public void initViews() {
 		etLoginEmail = (EditText) findViewById(R.id.et_login_email);
 		etLoginPwd = (EditText) findViewById(R.id.et_login_pwd);
 	}
@@ -183,7 +181,7 @@ public class LoginActivity extends BaseActivity {
 	}
 
 	/**
-	 * 登录成功后获取用户基本信息 缓存到本能
+	 * 登录成功后获取用户基本信息 缓存到本地
 	 */
 	private void refreshUserInfo() {
 		HttpUtils httpRefresh = new HttpUtils();

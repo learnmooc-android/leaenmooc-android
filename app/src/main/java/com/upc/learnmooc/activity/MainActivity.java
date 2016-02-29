@@ -1,6 +1,7 @@
 package com.upc.learnmooc.activity;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -223,6 +224,25 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		tvDownload.setTextColor(getResources().getColor(R.color.word_normal_color));
 		tvMine.setTextColor(getResources().getColor(R.color.word_normal_color));
 	}
+	/**
+	 * 跳课程分类
+	 */
+	public void ToCourseClassify(View view) {
+		startActivity(new Intent(this, ClassifyActivity.class));
+	}
 
+	/**
+	 * 跳课程搜索
+	 */
+	public void ToSearchCourse(View view) {
+//		startActivity(new Intent(mActivity, ClassifyActivity.class));
+	}
+
+	/**
+	 * 跳学习历史
+	 */
+	public void ToCourseHistory(View view) {
+//		startActivity(new Intent(mActivity, ClassifyActivity.class));
+	}
 
 }
