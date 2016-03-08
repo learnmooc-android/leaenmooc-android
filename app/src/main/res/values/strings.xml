@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">慕课Ime</string>
     <string name="text_test">关于Nodejs页面"伪动态化"的初步尝试</string>
+    <string name="share">慕课Ime</string>
 </resources>

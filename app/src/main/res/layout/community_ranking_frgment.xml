@@ -3,9 +3,11 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView
-        android:layout_gravity="center"
-        android:text="排位"
+
+    <ListView
+        android:divider="@null"
+        android:id="@+id/lv_rank_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>
