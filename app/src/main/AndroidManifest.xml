@@ -1,6 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.upc.learnmooc">
+<manifest package="com.upc.learnmooc"
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -29,6 +29,8 @@
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.ResetPwdActivity"/>
         <activity android:name=".activity.ClassifyActivity"/>
+        <activity android:name=".activity.CourseHistoryActivity"/>
+        <activity android:name=".activity.ArticleActivity"/>
     </application>
 
 </manifest>

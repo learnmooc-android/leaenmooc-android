@@ -1,6 +1,5 @@
 package com.upc.learnmooc.fragment;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -22,7 +21,6 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.upc.learnmooc.R;
-import com.upc.learnmooc.activity.ClassifyActivity;
 import com.upc.learnmooc.domain.MainCourse;
 import com.upc.learnmooc.global.GlobalConstants;
 import com.upc.learnmooc.utils.CacheUtils;
@@ -373,7 +371,5 @@ public class CourseFragment extends BaseFragment {
 		public TextView tvCoursedate;
 
 	}
-
-
 
 }

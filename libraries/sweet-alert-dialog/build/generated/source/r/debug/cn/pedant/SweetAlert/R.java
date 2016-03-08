@@ -1507,7 +1507,7 @@ containing a value of this type.
         public static int homeAsUp=0x7f0b000d;
         public static int icon=0x7f0b002b;
         public static int ifRoom=0x7f0b0018;
-        public static int image=0x7f0b0028;
+        public static int iv_point=0x7f0b0028;
         public static int listMode=0x7f0b0009;
         public static int list_item=0x7f0b002a;
         public static int loading=0x7f0b0044;

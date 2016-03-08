@@ -34,4 +34,5 @@ public class GuideViewPager extends ViewPager {
 		}
 		return super.onInterceptTouchEvent(even);
 	}
+
 }

@@ -20,6 +20,7 @@ import com.upc.learnmooc.R;
 import com.upc.learnmooc.domain.User;
 import com.upc.learnmooc.global.GlobalConstants;
 import com.upc.learnmooc.utils.ToastUtils;
+import com.upc.learnmooc.utils.UserInfoCacheUtils;
 
 /**
  * Created by Explorer on 2016/1/26.
@@ -201,12 +202,12 @@ public class LoginActivity extends BaseActivity {
 				User userInfo = getData(responseInfo.result);
 
 				//登录成功的话 更新一下用户信息到本地
-				SharedPreferences spf = getSharedPreferences("user_info", MODE_PRIVATE);
-				spf.edit().putString("password", userInfo.getPassword())
-						.putString("nickname", userInfo.getNickname())
-						.putString("avatar", userInfo.getAvatar())
-						.putInt("roleType", userInfo.getRoleType())
-						.apply();
+				UserInfoCacheUtils.setInt(LoginActivity.this,"id",userInfo.getId());
+				UserInfoCacheUtils.setString(LoginActivity.this, "password", userInfo.getPassword());
+				UserInfoCacheUtils.setString(LoginActivity.this, "nickname", userInfo.getNickname());
+				UserInfoCacheUtils.setString(LoginActivity.this, "avatar", userInfo.getAvatar());
+				UserInfoCacheUtils.setInt(LoginActivity.this, "roleType", userInfo.getRoleType());
+
 				msg.what = LOGIN_SUCCESS;
 				mHandler.sendMessage(msg);
 
@@ -214,7 +215,7 @@ public class LoginActivity extends BaseActivity {
 
 			@Override
 			public void onFailure(HttpException e, String s) {
-				ToastUtils.showToastShort(LoginActivity.this, "缓存信息失败");
+				ToastUtils.showToastShort(LoginActivity.this, "信息缓存失败");
 			}
 		});
 	}

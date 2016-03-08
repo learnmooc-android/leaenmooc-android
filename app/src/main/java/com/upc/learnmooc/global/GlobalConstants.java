@@ -15,5 +15,7 @@ public class GlobalConstants {
 	public final static String DOWNLOAD_URL = SERVER_URL + "/update.json";
 	public final static String GET_MAIN_COURSE_URL = "http://120.27.47.134/mainCourse.json";
 	public final static String GET_COUTSE_CLASSIFY = "http://120.27.47.134/courseClassify.json";
+	public final static String GET_HISTORY_COURSE = "http://120.27.47.134/historyCourse.json";
+	public final static String GET_ARTICLE_LIST = "http://120.27.47.134/article/articleList.json";
 }
 

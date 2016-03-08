@@ -83,7 +83,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
 		tvTime.setText("最近刷新时间:" + getCurrentTime());
 	}
 
-	/*
+	/**
 	 * 初始化脚布局
 	 */
 	private void initFooterView() {

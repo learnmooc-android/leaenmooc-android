@@ -49,6 +49,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	private TextView tvCommunity;
 	private TextView tvDownload;
 	private TextView tvMine;
+	private static final int BACK_TO_ARTICLE_LIST = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -239,10 +240,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	}
 
 	/**
-	 * 跳学习历史
+	 * 跳转 学习历史记录
 	 */
-	public void ToCourseHistory(View view) {
-//		startActivity(new Intent(mActivity, ClassifyActivity.class));
+	public void ToCourseHistory(View view){
+		startActivity(new Intent(MainActivity.this, CourseHistoryActivity.class));
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (resultCode){
+			case BACK_TO_ARTICLE_LIST:
+//				ToastUtils.showToastLong(MainActivity.this,"返回处理");
+					setSelect(1);
+				break;
+		}
+	}
 }

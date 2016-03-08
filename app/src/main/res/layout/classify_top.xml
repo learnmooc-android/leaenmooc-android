@@ -5,7 +5,7 @@
                 android:background="@color/top_bar_color">
 
     <ImageView
-        android:id="@+id/iv_classify"
+        android:id="@+id/iv_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -20,8 +20,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
-        android:layout_toEndOf="@+id/iv_classify"
-        android:layout_toRightOf="@+id/iv_classify"
+        android:layout_toEndOf="@+id/iv_history"
+        android:layout_toRightOf="@+id/iv_history"
         android:onClick="TurnToLogin"
         android:text="分类"
         android:textColor="@color/title_word_color"
