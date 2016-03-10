@@ -1,11 +1,13 @@
 package com.upc.learnmooc.fragment;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.upc.learnmooc.R;
+import com.upc.learnmooc.activity.VideoActivity;
 import com.upc.learnmooc.domain.MainCourse;
 import com.upc.learnmooc.global.GlobalConstants;
 import com.upc.learnmooc.utils.CacheUtils;
@@ -228,6 +231,16 @@ public class CourseFragment extends BaseFragment {
 			if (listCourseList != null) {
 				listCourseAdapter = new ListCourseAdapter();
 				mListView.setAdapter(listCourseAdapter);
+
+				mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						Intent intent = new Intent();
+						intent.setClass(mActivity, VideoActivity.class);
+						intent.putExtra("id", listCourseList.get(position).getCourseId());
+						startActivity(intent);
+					}
+				});
 			}
 
 			// 自动轮播条显示

@@ -90,11 +90,28 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="ShareSDK-Evernote-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Wechat-2.7.0" level="project" />
     <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
+    <orderEntry type="library" exported="" name="jsoup-1.8.3" level="project" />
+    <orderEntry type="library" exported="" name="nineoldandroids-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
-    <orderEntry type="library" exported="" name="xUtils-2.6.14" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-QQ-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-SinaWeibo-2.7.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="MobTools-2016.0301.1053" level="project" />
+    <orderEntry type="library" exported="" name="xUtils-2.6.14" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-YouDao-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-QZone-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Core-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="MobCommons-2016.0301.1053" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Moments-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Wechat-Core-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-ShortMessage-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="ShareSDK-Email-2.7.0" level="project" />
+    <orderEntry type="module" module-name="sinavideo_playersdk" exported="" />
     <orderEntry type="module" module-name="sweet-alert-dialog" exported="" />
+    <orderEntry type="module" module-name="ViewPagerIndicator" exported="" />
   </component>
 </module>
