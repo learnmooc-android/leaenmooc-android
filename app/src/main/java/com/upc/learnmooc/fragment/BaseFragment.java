@@ -33,6 +33,7 @@ public abstract class BaseFragment extends Fragment {
 		initData();
 	}
 
+
 	//初始化页面数据 不必须
 	public void initData() {
 

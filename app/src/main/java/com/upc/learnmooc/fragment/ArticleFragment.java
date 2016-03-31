@@ -47,7 +47,7 @@ public class ArticleFragment extends BaseFragment {
 	public View initViews() {
 		View view = View.inflate(mActivity, R.layout.community_article_frgment, null);
 
-		ViewUtils.inject(view);
+		ViewUtils.inject(this,view);
 
 		mListView = (RefreshListView) view.findViewById(R.id.lv_artilce);
 
@@ -76,6 +76,7 @@ public class ArticleFragment extends BaseFragment {
 				Intent intent = new Intent();
 				intent.setClass(mActivity, ArticleActivity.class);
 				intent.putExtra("url", articleData.get(position).getUrl());
+				intent.putExtra("title", articleData.get(position).getTitle());
 				startActivityForResult(intent, BACK_TO_ARTICLE_LIST);
 			}
 		});

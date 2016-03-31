@@ -3,6 +3,11 @@ package com.upc.learnmooc.activity;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -20,35 +25,49 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  * 文章内容
  * Created by Explorer on 2016/3/7.
  */
-public class ArticleActivity extends BaseActivity {
+public class ArticleActivity extends AppCompatActivity {
 
 	private WebView mWebView;
 	private ProgressBar mProgressBar;
 	private ImageView ivCollection;
 	private ImageView ivShare;
 	private String url;
+	private FloatingActionButton fab;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.article_acticity);
+//		setContentView(R.layout.article_acticity);
+		setContentView(R.layout.activity_self_article);
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+		toolBarLayout.setExpandedTitleTextAppearance(R.style.MyTitle);
+		toolBarLayout.setTitle(getIntent().getStringExtra("title"));
 
 		initViews();
+		fab = (FloatingActionButton) findViewById(R.id.fab);
 		setCollection(false);
-		ivCollection.setOnClickListener(new View.OnClickListener() {
+		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(View view) {
 				setCollection(true);
 			}
 		});
+//		ivCollection.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//
+//			}
+//		});
 	}
 
-	@Override
 	@SuppressLint("SetJavaScriptEnabled")
 	public void initViews() {
 		mWebView = (WebView) findViewById(R.id.wb_article);
 		mProgressBar = (ProgressBar) findViewById(R.id.pb_progress);
-		ivCollection = (ImageView) findViewById(R.id.iv_collection);
+//		ivCollection = (ImageView) findViewById(R.id.iv_collection);
 		ivShare = (ImageView) findViewById(R.id.iv_article_share);
 
 		url = getIntent().getStringExtra("url");
@@ -114,22 +133,26 @@ public class ArticleActivity extends BaseActivity {
 			//如果没有收藏这个文章  设置收藏 缓存 改变图标
 			if (article == null) {
 				UserInfoCacheUtils.setCache(url, url, ArticleActivity.this);
-				ivCollection.setBackgroundResource(R.drawable.has_collection);
+				fab.setImageResource(R.drawable.has_collection);
 
+				Snackbar.make(fab, "已收藏！^_^~~~", Snackbar.LENGTH_LONG)
+						.setAction("Action", null).show();
 				//数据库保存用户收藏的文章
 
 			} else {
+				System.out.println("文章 is " + article);
 				//如果已经收藏  取消收藏 清除缓存 改变图标
 				UserInfoCacheUtils.setCache(url, null, ArticleActivity.this);
-				ivCollection.setBackgroundResource(R.drawable.collection);
+				fab.setImageResource(R.drawable.collection);
+				Snackbar.make(fab, "取消收藏！T^T~~~", Snackbar.LENGTH_LONG)
+						.setAction("Action", null).show();
 
 				//数据库删除用户收藏的文章的记录
 			}
 		} else {
-			if (article == null) {
-				ivCollection.setBackgroundResource(R.drawable.collection);
+				fab.setImageResource(R.drawable.collection);
 			} else {
-				ivCollection.setBackgroundResource(R.drawable.has_collection);
+				fab.setImageResource(R.drawable.has_collection);
 			}
 		}
 

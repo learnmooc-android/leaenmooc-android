@@ -22,7 +22,8 @@
             android:id="@+id/backButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
 
         <com.sina.sinavideo.sdk.widgets.VDVideoTitleTextView
             android:id="@+id/titleButton1"
@@ -30,15 +31,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 
-        <com.sina.sinavideo.sdk.widgets.VDVideoDecodingButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/controller_title_share_btn_marginRight"
-            android:padding="@dimen/btn_padding" />
+        <!--<com.sina.sinavideo.sdk.widgets.VDVideoDecodingButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="@dimen/controller_title_share_btn_marginRight"-->
+            <!--android:padding="@dimen/btn_padding" />-->
 
         <com.sina.sinavideo.sdk.widgets.playlist.VDVideoRelatedButton
             android:id="@+id/listButton1"
@@ -65,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="2dp" />
 
         <com.sina.sinavideo.sdk.widgets.VDVideoTimeTextView
@@ -72,7 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"/>
 
         <com.sina.sinavideo.sdk.widgets.VDVideoPlaySeekBar
             android:id="@+id/playerseek2"
@@ -123,8 +127,10 @@
         android:visibility="gone" >
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="#80000000"
             android:orientation="vertical" >
 
@@ -134,7 +140,7 @@
                 android:layout_height="fill_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/item_track"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <com.sina.sinavideo.sdk.widgets.playlist.VDVideoPlayListView
                 android:id="@+id/play_list_view"
@@ -147,6 +153,7 @@
                 android:scrollbars="none"
                 android:visibility="visible"
                 app:listItem="@layout/video_list_sport" />
+
         </RelativeLayout>
     </com.sina.sinavideo.sdk.widgets.playlist.VDVideoPlayListContainer>
 
@@ -284,19 +291,19 @@
 
     <!-- 广告部分，仅在暂停按钮的时候触发 -->
 
-    <com.sina.sinavideo.sdk.container.VDVideoADFrameContainer
-        android:id="@+id/adFrameContainer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        app:adConfig="adConfigPause" >
+    <!--<com.sina.sinavideo.sdk.container.VDVideoADFrameContainer-->
+        <!--android:id="@+id/adFrameContainer1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:visibility="gone"-->
+        <!--app:adConfig="adConfigPause" >-->
 
-        <ImageButton
-            android:id="@+id/adFrameImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" />
-    </com.sina.sinavideo.sdk.container.VDVideoADFrameContainer>
+        <!--<ImageButton-->
+            <!--android:id="@+id/adFrameImageView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_launcher" />-->
+    <!--</com.sina.sinavideo.sdk.container.VDVideoADFrameContainer>-->
 
 </com.sina.sinavideo.sdk.VDVideoViewLayer>

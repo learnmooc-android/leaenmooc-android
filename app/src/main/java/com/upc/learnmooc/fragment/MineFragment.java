@@ -1,12 +1,16 @@
 package com.upc.learnmooc.fragment;
 
+import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.upc.learnmooc.R;
+import com.upc.learnmooc.activity.CourseHistoryActivity;
+import com.upc.learnmooc.activity.SelfArticleActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +34,13 @@ public class MineFragment extends BaseFragment {
 			"收藏的文章", "我的笔记", "最近学习"
 	};
 	private List<Map<String, Object>> listData;
+	private static final int FOURSED_COURSE = 0;
+	private static final int MY_PLAN = 1;
+	private static final int MY_MESSAGES = 2;
+	private static final int COLLECTED_ARTICLE = 3;
+	private static final int MY_NOTE = 4;
+	private static final int STUDY_HISTORY = 5;
+
 
 	@ViewInject(R.id.gv_menu)
 	private GridView mGridView;
@@ -43,6 +54,30 @@ public class MineFragment extends BaseFragment {
 		SimpleAdapter gridViewAdapter = new SimpleAdapter(mActivity, getData(), R.layout.item_mine_gridview,
 				new String[]{"iv_pic","tv_name"}, new int[]{R.id.iv_pic, R.id.tv_name});
 		mGridView.setAdapter(gridViewAdapter);
+		mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				switch (position){
+					case FOURSED_COURSE:
+						break;
+					case MY_PLAN:
+						break;
+					case MY_MESSAGES:
+						break;
+					case COLLECTED_ARTICLE:
+						startActivity(new Intent(mActivity, SelfArticleActivity.class));
+						break;
+					case MY_NOTE:
+						break;
+					case STUDY_HISTORY:
+						startActivity(new Intent(mActivity, CourseHistoryActivity.class));
+						break;
+					default:
+						break;
+				}
+			}
+		});
+
 		return view;
 	}
 

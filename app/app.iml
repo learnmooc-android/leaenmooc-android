@@ -72,7 +72,10 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/design/22.2.1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.nicolasjafelle/paginggridview/1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaResources" />
@@ -103,6 +106,7 @@
     <orderEntry type="library" exported="" name="MobTools-2016.0301.1053" level="project" />
     <orderEntry type="library" exported="" name="xUtils-2.6.14" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-YouDao-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="renderscript-v8" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-QZone-2.7.0" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Core-2.7.0" level="project" />
     <orderEntry type="library" exported="" name="MobCommons-2016.0301.1053" level="project" />
@@ -110,6 +114,9 @@
     <orderEntry type="library" exported="" name="ShareSDK-Wechat-Core-2.7.0" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-ShortMessage-2.7.0" level="project" />
     <orderEntry type="library" exported="" name="ShareSDK-Email-2.7.0" level="project" />
+    <orderEntry type="library" exported="" name="design-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="paginggridview-1.0" level="project" />
+    <orderEntry type="library" exported="" name="cardview-v7-22.2.0" level="project" />
     <orderEntry type="module" module-name="sinavideo_playersdk" exported="" />
     <orderEntry type="module" module-name="sweet-alert-dialog" exported="" />
     <orderEntry type="module" module-name="ViewPagerIndicator" exported="" />

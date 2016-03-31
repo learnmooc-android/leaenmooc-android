@@ -1,6 +1,7 @@
 package com.upc.learnmooc.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -21,9 +22,10 @@ import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.widget.ImageView;
 
+import com.upc.learnmooc.R;
+
 /**
- *自定义的圆形ImageView
- *
+ * 自定义的圆形ImageView
  */
 public class CircleImageView extends ImageView {
 
@@ -34,7 +36,7 @@ public class CircleImageView extends ImageView {
 
 	// 圆形边框的厚度默认值。
 	// 如果是0，则没有天蓝色渐变的边框。
-	private static final int DEFAULT_BORDER_WIDTH = 6;
+	private static final int DEFAULT_BORDER_WIDTH = 2;
 
 	private static final int DEFAULT_BORDER_COLOR = Color.BLACK;
 
@@ -90,6 +92,12 @@ public class CircleImageView extends ImageView {
 		//
 		// a.recycle();
 
+		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0);
+		mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_borderWith, DEFAULT_BORDER_WIDTH);
+		mBorderColor = a.getColor(R.styleable.CircleImageView_borderColor,
+				DEFAULT_BORDER_COLOR);
+
+		a.recycle();
 		init();
 	}
 
@@ -177,8 +185,7 @@ public class CircleImageView extends ImageView {
 	}
 
 	/**
-	 * @param borderWidth
-	 *            圆形的边框厚度。
+	 * @param borderWidth 圆形的边框厚度。
 	 */
 	public void setBorderWidth(int borderWidth) {
 		if (borderWidth == mBorderWidth) {
@@ -289,7 +296,7 @@ public class CircleImageView extends ImageView {
 				.setTextSize(getResources().getDisplayMetrics().density * 18);
 
 		mSweepGradient = new SweepGradient(getWidth() / 2, getHeight() / 2,
-				new int[] { Color.rgb(255, 255, 255), Color.rgb(1, 209, 255) },
+				new int[]{Color.rgb(255, 255, 255), Color.rgb(1, 209, 255)},
 				null);
 
 		mBorderPaint.setShader(mSweepGradient);

@@ -1,7 +1,6 @@
 package com.upc.learnmooc.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -181,15 +180,15 @@ public class CourseHistoryActivity extends BaseActivity {
 	}
 
 	/**
-	 * 返回主页
+	 * 返回前一页
 	 */
 	public void ToCourseMain(View view) {
-		startActivity(new Intent(CourseHistoryActivity.this, MainActivity.class));
+//		startActivity(new Intent(CourseHistoryActivity.this, MainActivity.class));
 		finish();
 	}
 
 	/**
-	 * 返回主页
+	 * 清空记录
 	 */
 	public void ClearAll(View view) {
 

@@ -1,7 +1,5 @@
 package com.sina.sinavideo.sdk;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -42,8 +40,8 @@ import com.sina.sinavideo.sdk.data.VDVideoListInfo;
 import com.sina.sinavideo.sdk.dlna.DLNAController;
 import com.sina.sinavideo.sdk.dlna.DLNAEventListener;
 import com.sina.sinavideo.sdk.dlna.DLNAEventListener.OnMediaControllerListener;
-import com.sina.sinavideo.sdk.utils.VDLog;
 import com.sina.sinavideo.sdk.utils.VDApplication;
+import com.sina.sinavideo.sdk.utils.VDLog;
 import com.sina.sinavideo.sdk.utils.VDPlayPauseHelper;
 import com.sina.sinavideo.sdk.utils.VDPlayerSoundManager;
 import com.sina.sinavideo.sdk.utils.VDSharedPreferencesUtil;
@@ -53,12 +51,14 @@ import com.sina.sinavideo.sdk.utils.VDVideoScreenOrientation;
 import com.sina.sinavideo.sdk.widgets.VDVideoADTicker;
 import com.sina.video_playersdkv2.R;
 
+import java.util.List;
+
 /**
  * 视频SDK的基本容器类，是一个FrameLayout，一般包含三层，按照从下往上的顺序：<br>
  * 第一层：自定义的VideoView，只是用来播放视频<br>
  * 第二层：广告显示层：广告、Tips、教程等显示<br>
  * 第三层：控制层：一堆按钮集合，在这一层实现所有的控制单元<br>
- * 
+ *
  * @author sunxiao1@staff.sina.com.cn
  */
 public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
@@ -68,10 +68,14 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 	private Context mContext = null;
 	private VDVideoViewLayerContextData mVDVideoViewLayerData = new VDVideoViewLayerContextData();
 	private ISinaVideoView mVideoView = null;
-	/** 全屏的时候 VDVideoView 的直接父亲 */
+	/**
+	 * 全屏的时候 VDVideoView 的直接父亲
+	 */
 	private LinearLayout mVideoFullScreenContainer = null;
 	private ViewGroup.LayoutParams mVideoViewParams = null;
-	/** 小屏时VDVideoView 的直接父亲 */
+	/**
+	 * 小屏时VDVideoView 的直接父亲
+	 */
 	private ViewGroup mVDVideoViewContainer = null;
 
 	private VDPlayPauseHelper mVDPlayPauseHelper;
@@ -99,7 +103,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 	/**
 	 * 构造函数，这种情况下，无法自动加载xml<br />
 	 * 适用于手动加载的情况下，new完毕后，使用：setLayers 函数来加载响应的layer
-	 * 
+	 *
 	 * @param context
 	 */
 	public VDVideoView(Context context) {
@@ -127,7 +131,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 构造函数
-	 * 
+	 *
 	 * @param context
 	 * @param attrs
 	 */
@@ -160,7 +164,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 构造函数
-	 * 
+	 *
 	 * @param context
 	 * @param attrs
 	 * @param defStyle
@@ -266,7 +270,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 设置当前vdvideoview的父类容器，[只能手动指定，否则，再第一次进入即为横屏时候，无法处理]
-	 * 
+	 *
 	 * @param container
 	 */
 	public void setVDVideoViewContainer(ViewGroup container) {
@@ -275,7 +279,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 设置帧间广告回调
-	 * 
+	 *
 	 * @param l
 	 */
 	public void setFrameADListener(OnVDVideoFrameADListener l) {
@@ -288,7 +292,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 设置前贴片广告（插入广告）回调
-	 * 
+	 *
 	 * @param l
 	 */
 	public void setInsertADListener(OnVDVideoInsertADListener l) {
@@ -301,7 +305,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 设置播放列表回调
-	 * 
+	 *
 	 * @param l
 	 */
 	public void setPlaylistListener(OnVDVideoPlaylistListener l) {
@@ -363,7 +367,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 建立视频，使用VDVideoListInfo方式
-	 * 
+	 *
 	 * @param context
 	 * @param infoList
 	 */
@@ -388,7 +392,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 建立视频
-	 * 
+	 *
 	 * @param context
 	 * @param path
 	 */
@@ -414,7 +418,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 开始播放视频
-	 * 
+	 *
 	 * @param index
 	 */
 	public void play(int index) {
@@ -431,7 +435,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 按照给定的position来播放视频，适合历史记录等情况下
-	 * 
+	 *
 	 * @param index
 	 * @param position
 	 */
@@ -449,12 +453,12 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * VDVideoListInfo的VDVideoview包装版本
-	 * 
+	 *
 	 * @param insertADList
 	 * @param currInfo
 	 */
 	public void refreshInsertADList(List<VDVideoInfo> insertADList,
-			VDVideoInfo currInfo) {
+									VDVideoInfo currInfo) {
 		VDVideoViewController controller = VDVideoViewController
 				.getInstance(mContext);
 		if (controller != null)
@@ -463,7 +467,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 释放资源
-	 * 
+	 *
 	 * @param isOnlyReloadVideo
 	 */
 	public void release(boolean isOnlyReloadVideo) {
@@ -514,7 +518,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 	/**
 	 * 是否使用自定义音量滑块<br>
 	 * 注：如果不实用音量滑块组件，则默认为系统提供的音量提示
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean hasSoundWidget() {
@@ -526,7 +530,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 	 * 有时候，播放器会嵌入到很奇怪的vg中，比如：fragment等<br/>
 	 * 默认，SDK会自己寻找decoreView为父类容器<br />
 	 * 但在特殊情况下，找到的decoreView不是正确的父容器，这时候需要手工指定
-	 * 
+	 *
 	 * @param vg
 	 */
 	public void setExternalFullContainer(ViewGroup vg) {
@@ -535,9 +539,8 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 手工加载layerAttrs指向的TypedArray
-	 * 
-	 * @param resourceID
-	 *            resources-array的name值
+	 *
+	 * @param resourceID resources-array的name值
 	 */
 	public void setLayers(int resourceID) {
 		if (resourceID <= 0) {
@@ -558,7 +561,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 将当前给定的容器，提升到activity的顶层容器中
-	 * 
+	 *
 	 * @param view
 	 */
 	private void changeToRoot(View view) {
@@ -587,12 +590,12 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 具体的转屏执行函数--使用父窗口方式
-	 * 
+	 *
 	 * @param container
 	 * @param isFullScreen
 	 */
 	private void setIsFullModeUsingContainer(ViewGroup container,
-			boolean isFullScreen) {
+											 boolean isFullScreen) {
 		if (container == null) {
 			VDLog.e(VDVideoFullModeController.TAG,
 					"videoview---setIsFullMode---container--return null");
@@ -657,7 +660,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 增加一个私有函数，用来做initVideo时候的调用专用
-	 * 
+	 *
 	 * @param isFullScreen
 	 * @param isInited
 	 */
@@ -720,9 +723,8 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 横竖屏切换，从onConfigurationChanged入口进来的
-	 * 
-	 * @param isFullScreen
-	 *            true 表全屏；false 表非全屏
+	 *
+	 * @param isFullScreen true 表全屏；false 表非全屏
 	 */
 	public void setIsFullScreen(boolean isFullScreen) {
 		setVirtualButtonVisible(!isFullScreen);
@@ -731,9 +733,9 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 当前所有的layer显示与关闭
-	 * 
-	 * @deprecated 不要再使用，后期会关闭此方法
+	 *
 	 * @param isGone
+	 * @deprecated 不要再使用，后期会关闭此方法
 	 */
 	public void setLayersVisiblity(boolean isGone) {
 		for (VDVideoViewLayerContext item : mVDVideoViewLayerData
@@ -746,7 +748,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 添加视图控件
-	 * 
+	 *
 	 * @param vv
 	 */
 	private void addVideoView(ISinaVideoView vv) {
@@ -768,7 +770,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 从TypedArray里面抽取需要的resourceID
-	 * 
+	 *
 	 * @param typedArr
 	 */
 	private void initLayer(TypedArray typedArr) {
@@ -812,7 +814,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 设置弹出窗口的相关属性，用于手动加载VDVideoview控件的时候
-	 * 
+	 *
 	 * @param type
 	 * @param width
 	 * @param height
@@ -826,7 +828,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 根据现有的转屏方向确定那些layout应该开着，那些应该gone 奇数为竖屏，偶数为横屏
-	 * 
+	 *
 	 * @return
 	 */
 	private boolean getIsFullMode(int seq) {
@@ -839,9 +841,6 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 从layerAttrs属性中加载相应的layer，支持两种格式： 1、直接使用@layer方式组装数组 2、使用@array方式做二维数组方式
-	 * 
-	 * @param context
-	 * @param attrs
 	 */
 	private void readLayerAttrs(int resID) {
 		// 将resourceID指向的数组加载到内存中，一般为：
@@ -977,7 +976,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 在当前容器中，添加一页
-	 * 
+	 *
 	 * @param layer
 	 * @param isGone
 	 */
@@ -1169,8 +1168,8 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 			if (null == controller)
 				return;
 			controller.mVDPlayerInfo.mPlayStatus = isPlaying
-			// ? VDPlayerInfo.PLAYER_ISPLAYING
-			? VDPlayerInfo.PLAYER_STARTED
+					// ? VDPlayerInfo.PLAYER_ISPLAYING
+					? VDPlayerInfo.PLAYER_STARTED
 					: VDPlayerInfo.PLAYER_PAUSE;
 			controller.mVDPlayerInfo.mIsPlaying = isPlaying;
 			controller.notifyPlayStateChanged();
@@ -1317,7 +1316,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * activity的onKeyEvent回调
-	 * 
+	 *
 	 * @param keyCode
 	 * @param event
 	 * @return
@@ -1333,7 +1332,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 是否播放中
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean getIsPlaying() {
@@ -1347,7 +1346,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 播放器当前状态
-	 * 
+	 *
 	 * @return
 	 */
 	public int getPlayerStatus() {
@@ -1361,7 +1360,7 @@ public class VDVideoView extends FrameLayout implements OnRegisterDLNAListener,
 
 	/**
 	 * 数据部分
-	 * 
+	 *
 	 * @return
 	 */
 	public VDVideoListInfo getListInfo() {

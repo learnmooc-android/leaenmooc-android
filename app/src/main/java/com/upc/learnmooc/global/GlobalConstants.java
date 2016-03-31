@@ -18,5 +18,12 @@ public class GlobalConstants {
 	public final static String GET_HISTORY_COURSE = "http://120.27.47.134/historyCourse.json";
 	public final static String GET_ARTICLE_LIST = "http://120.27.47.134/article/articleList.json";
 	public final static String GET_RANK_LIST = "http://120.27.47.134/rank/rankInfo.json";
+	public final static String GET_VIDEO = "http://120.27.47.134/video/courseContent.json";
+	public final static String GET_VIDEO_CHAPTERINFO = "http://120.27.47.134/video/chapterInfo.json";
+	public final static String GET_VIDEO_COMMENTINFO = "http://120.27.47.134/video/commentInfo.json";
+	public final static String GET_VIDEO_DETAILTINFO = "http://120.27.47.134/video/detailInfo.json";
+	public final static String GET_ASPECT_DATA = "http://120.27.47.134/aspect/aspectData.json";
+	public final static String GET_EXPERT_LIST = "http://120.27.47.134/expert/expertInfo.json";
+
 }
 

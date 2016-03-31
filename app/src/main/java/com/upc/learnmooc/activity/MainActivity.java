@@ -8,12 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.upc.learnmooc.R;
 import com.upc.learnmooc.fragment.CommunityFragment;
@@ -50,6 +52,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	private TextView tvDownload;
 	private TextView tvMine;
 	private static final int BACK_TO_ARTICLE_LIST = 0;
+	private double exitTime = 0.1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +191,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	 */
 	private void setSelect(int i) {
 		initTabImage();
-		mViewPager.setCurrentItem(i,false);
+		mViewPager.setCurrentItem(i, false);
 		switch (i) {
 			case 0:
 				ivCourse.setImageResource(R.drawable.course_pressed);
@@ -225,6 +228,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 		tvDownload.setTextColor(getResources().getColor(R.color.word_normal_color));
 		tvMine.setTextColor(getResources().getColor(R.color.word_normal_color));
 	}
+
 	/**
 	 * 跳课程分类
 	 */
@@ -242,17 +246,37 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 	/**
 	 * 跳转 学习历史记录
 	 */
-	public void ToCourseHistory(View view){
+	public void ToCourseHistory(View view) {
 		startActivity(new Intent(MainActivity.this, CourseHistoryActivity.class));
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (resultCode){
+		switch (resultCode) {
 			case BACK_TO_ARTICLE_LIST:
 //				ToastUtils.showToastLong(MainActivity.this,"返回处理");
-					setSelect(1);
+				setSelect(1);
 				break;
 		}
+	}
+
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+
+			if ((System.currentTimeMillis() - exitTime) > 2000)  //System.currentTimeMillis()无论何时调用，肯定大于2000
+			{
+				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
+			}
+
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

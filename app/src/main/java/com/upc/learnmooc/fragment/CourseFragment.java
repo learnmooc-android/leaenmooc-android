@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -23,6 +24,8 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.upc.learnmooc.R;
+import com.upc.learnmooc.activity.ExperimentActivity;
+import com.upc.learnmooc.activity.SkillTreeActivity;
 import com.upc.learnmooc.activity.VideoActivity;
 import com.upc.learnmooc.domain.MainCourse;
 import com.upc.learnmooc.global.GlobalConstants;
@@ -46,6 +49,10 @@ public class CourseFragment extends BaseFragment {
 	@ViewInject(R.id.lv_list_course)
 	private RefreshListView mListView;
 
+	@ViewInject(R.id.skill_tree)
+	private LinearLayout mLayout;
+	private LinearLayout mExpertLayout;
+
 	private MainCourse mainCourseInfo;//Course首页的数据对象
 	private ArrayList<MainCourse.TopCourse> topCourseList;//头部轮播的数据对象
 	private ArrayList<MainCourse.ListCourse> listCourseList;//课程列表的数据对象
@@ -63,6 +70,22 @@ public class CourseFragment extends BaseFragment {
 	public View initViews() {
 		View view = View.inflate(mActivity, R.layout.course_fragment, null);
 		View heardView = View.inflate(mActivity, R.layout.heard_course_listview, null);
+
+		mLayout = (LinearLayout) heardView.findViewById(R.id.skill_tree);
+		mExpertLayout = (LinearLayout) heardView.findViewById(R.id.laboratory);
+		mLayout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(mActivity, SkillTreeActivity.class));
+			}
+		});
+
+		mExpertLayout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(mActivity, ExperimentActivity.class));
+			}
+		});
 
 		//注入view和事件
 		ViewUtils.inject(this, view);

@@ -37,7 +37,7 @@ public class RankingFragment extends BaseFragment {
 	@Override
 	public View initViews() {
 		View view = View.inflate(mActivity, R.layout.community_ranking_frgment, null);
-		ViewUtils.inject(view);
+		ViewUtils.inject(this,view);
 		mListView = (ListView) view.findViewById(R.id.lv_rank_list);
 
 		return view;

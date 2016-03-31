@@ -216,7 +216,7 @@ public class ClassifyActivity extends BaseActivity {
 
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
-			return false;
+			return true;
 		}
 	}
 

@@ -144,6 +144,10 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
 						mCurrrentState = STATE_PULL_REFRESH;
 						refreshState();
 					}
+
+					//在return之前调用 解决触摸事件和点击事件的冲突
+					super.onTouchEvent(ev);
+
 					return true;
 				}
 				break;
@@ -229,7 +233,7 @@ public class RefreshListView extends ListView implements AbsListView.OnScrollLis
 				|| scrollState == SCROLL_STATE_FLING) {
 
 			if (getLastVisiblePosition() == getCount() - 1 && !isLoadingMore) {// 滑动到最后
-				System.out.println("到底了.....");
+//				System.out.println("到底了.....");
 				mFooterView.setPadding(0, 0, 0, 0);// 显示
 				setSelection(getCount() - 1);// 改变listview显示位置
 
